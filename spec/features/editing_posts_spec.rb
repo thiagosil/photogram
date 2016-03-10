@@ -15,4 +15,11 @@ feature 'Display individual post' do
         expect(page).to have_content("Post updated hombre.")
         expect(page).to have_content("Oh god, you weren’t meant to see this picture")
     end
+    
+    it 'wont update without an image ' do  
+      fill_in 'Caption', with: "No picture because YOLO"
+      attach_file('Image', 'spec/files/images/coffee.zip')
+      click_button 'Update Post'
+      expect(page).to have_content('Something is wrong with your form!')
+    end  
 end
